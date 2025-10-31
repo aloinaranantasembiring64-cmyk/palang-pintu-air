@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proyek Palang Pintu Air Otomatis</title>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: linear-gradient(to bottom, #a0d8ff, #e3f6ff);
+      color: #03396c;
+      text-align: center;
+    }
+
+    header {
+      background: linear-gradient(to right, #0077cc, #3399ff);
+      color: white;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    header p {
+      margin-top: 5px;
+      font-size: 1rem;
+    }
+
+    section {
+      margin: 30px auto;
+      max-width: 800px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: left;
+    }
+
+    section h2 {
+      color: #005b99;
+      border-bottom: 2px solid #a0d8ff;
+      padding-bottom: 5px;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    /* ===== SIMULASI AIR ===== */
+    .simulasi {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 80px;
+      margin-top: 40px;
+      position: relative;
+      height: 300px;
+    }
+
+    .wadah {
+      width: 160px;
+      height: 220px;
+      border: 3px solid #0077cc;
+      border-radius: 10px;
+      background: #e6f3ff;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .air {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(to top, #3399ff, #66ccff);
+      transition: height 2s ease;
+    }
+
+    .sensor {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 25px;
+      height: 10px;
+      background: #ff4444;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(255,0,0,0.6);
+    }
+
+    .pintu {
+      position: absolute;
+      bottom: 0;
+      left: calc(50% - 25px);
+      width: 60px;
+      height: 20px;
+      background: #555;
+      border-radius: 5px;
+      transition: transform 2s ease;
+    }
+
+    .hiasan {
+      position: absolute;
+      bottom: 250px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 100px;
+      background: url('https://cdn-icons-png.flaticon.com/512/616/616408.png') no-repeat center/contain;
+      opacity: 0.15;
+    }
+
+    #mulaiBtn {
+      background: #0077cc;
+      color: white;
+      padding: 10px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+
+    #mulaiBtn:hover {
+      background: #005fa3;
+      transform: scale(1.05);
+    }
+
+    .comment-box {
+      margin-top: 40px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 80%;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+
+    textarea {
+      width: 100%;
+      height: 80px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      resize: none;
+    }
+
+    button.kirim {
+      margin-top: 10px;
+      padding: 8px 15px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .comment-item {
+      background: #f1f9ff;
+      margin-top: 10px;
+      padding: 8px;
+      border-radius: 5px;
+    }
+
+    footer {
+      margin-top: 40px;
+      background: #0077cc;
+      color: white;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Proyek Palang Pintu Air Otomatis</h1>
+    <p>Simulasi kerja sistem bendungan cerdas berbasis sensor air dan Arduino by kelompok 2</p>
+  </header>
+
+  <section>
+    <h2>Deskripsi Proyek</h2>
+    <p>
+      Proyek <strong>Palang Pintu Air Otomatis</strong> ini dirancang untuk mengontrol aliran air secara otomatis
+      menggunakan sensor ketinggian air dan motor servo yang dikendalikan Arduino.
+      Sistem ini membantu mencegah banjir dengan membuka atau menutup pintu air secara cerdas.
+    </p>
+  </section>
+
+  <section>
+    <h2>Nama Kelompok</h2>
+    <ul>
+      <li>1. Aloina Rananta Sembiring</li>
+      <li>2. Gytha astari gurusinga</li>
+      <li>3. Heli rianti Sembiring</li>
+      <li>4. Sila marcelia br karo</li>
+      <li>5. Kalmilatu Annisa</li>
+      <li>6.Natani Japerani</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Alat dan Bahan</h2>
+    <ul>
+      <li>Arduino Uno</li>
+      <li>Sensor air (Water Level Sensor)</li>
+      <li>Motor Servo / Motor DC</li>
+      <li>Breadboard dan kabel jumper</li>
+      <li>pompa air</li>
+      <li>akrilik</li>
+      <li>lem silicon</li>
+        </ul>
+  </section>
+
+  <section>
+    <h2>Cara Kerja</h2>
+    <p>
+      1️⃣ Sensor mendeteksi ketinggian air di wadah pertama.<br>
+      2️⃣ Jika air mencapai batas maksimum, sensor memberi sinyal ke Arduino.<br>
+      3️⃣ Arduino mengangkat pintu air secara otomatis.<br>
+      4️⃣ Air mengalir ke wadah kedua yang awalnya kosong.<br>
+      5️⃣ Setelah air berkurang, pintu menutup kembali secara otomatis.
+    </p>
+  </section>
+
+  <section style="text-align:center;">
+    <h2>Simulasi Palang Pintu Air</h2>
+    <button id="mulaiBtn" onclick="mulaiSimulasi()">Mulai Simulasi 💧</button>
+
+    <div class="simulasi">
+      <div class="wadah" id="wadahPenuh">
+        <div class="sensor" id="sensor"></div>
+        <div class="air" id="airPenuh"></div>
+      </div>
+
+      <div class="pintu" id="pintu"></div>
+
+      <div class="wadah" id="wadahKosong">
+        <div class="air" id="airKosong"></div>
+      </div>
+
+      <div class="hiasan"></div>
+    </div>
+  </section>
+
+  <div class="comment-box">
+    <h3>Tinggalkan Komentar anda dan mungkin sedikit saran</h3>
+    <textarea id="commentInput" placeholder="Tulis komentar Anda di sini..."></textarea>
+    <button class="kirim" onclick="addComment()">Kirim</button>
+    <div id="commentList"></div>
+  </div>
+
+  <footer>
+    <p>projek kelompok 2 XI TKJ 2 Editor by Aloina Rananta
+    </p>
+  </footer>
+
+  <script>
+    function mulaiSimulasi() {
+      const airPenuh = document.getElementById('airPenuh');
+      const airKosong = document.getElementById('airKosong');
+      const pintu = document.getElementById('pintu');
+      const sensor = document.getElementById('sensor');
+
+      airPenuh.style.height = '0%';
+      airKosong.style.height = '0%';
+      pintu.style.transform = 'translateY(0)';
+      sensor.style.background = '#ff4444';
+      sensor.style.boxShadow = '0 0 10px rgba(255,0,0,0.6)';
+
+      setTimeout(() => {
+        airPenuh.style.height = '100%';
+      }, 500);
+
+      setTimeout(() => {
+        sensor.style.background = '#00ff00';
+        sensor.style.boxShadow = '0 0 10px rgba(0,255,0,0.8)';
+        pintu.style.transform = 'translateY(-80px)';
+      }, 3000);
+
+      setTimeout(() => {
+        airPenuh.style.height = '40%';
+        airKosong.style.height = '60%';
+      }, 5000);
+
+      setTimeout(() => {
+        pintu.style.transform = 'translateY(0)';
+      }, 8000);
+    }
+
+    function addComment() {
+      const input = document.getElementById('commentInput');
+      const list = document.getElementById('commentList');
+      const text = input.value.trim();
+
+      if (!text) return;
+      const div = document.createElement('div');
+      div.className = 'comment-item';
+      div.textContent = text;
+      list.prepend(div);
+      input.value = '';
+    }
+  </script>
+</body>
+</html>
